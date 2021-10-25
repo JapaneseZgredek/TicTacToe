@@ -35,6 +35,7 @@ public class Main {
             place = scanner.nextByte();
             error = placingMark(place, player, checkBoard, error);
         }
+        printCheckBoard(checkBoard);
         System.out.println("Congrats " + player.name + " you are the winner !!!");
     }
 // ----------------------------------------------------------------------------------------------------------
