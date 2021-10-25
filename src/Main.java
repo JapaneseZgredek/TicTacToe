@@ -1,8 +1,19 @@
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Before the game starts i want you to introduce how to place your mark: \n" +
+                            "LeftTop place - 1 \n" +
+                            "MiddleTop place - 2 \n" +
+                            "RightTop place - 3 \n" +
+                            "LeftMiddle place - 4 \n" +
+                            "Center place - 5 \n" +
+                            "RightMiddle place - 6 \n" +
+                            "LeftBottom place - 7 \n" +
+                            "MiddleBottom place - 8 \n" +
+                            "RightBottom place - 9 \n");
         char [][] checkBoard = {{' ','|',' ','|',' '},
                                 {'-','+','-','+','-'},
                                 {' ','|',' ','|',' '},
@@ -10,26 +21,31 @@ public class Main {
                                 {' ','|',' ','|',' '}};
         byte place;
         boolean error = false;
-        Player player = new Player("Player 2", 'O');
+        String player1Name;
+        String player2Name;
+        System.out.println("Player 1 what is your name/nickname?");
+        player1Name = scanner.nextLine();
+        System.out.println("Player 2 what is your name/nickname?");
+        player2Name = scanner.nextLine();
+        Player player = new Player(player2Name, 'O');
         while(doWeHaveWinner(checkBoard)){
             printCheckBoard(checkBoard);
-            didPlayerMakeMistake(error, player);
+            didPlayerMakeMistake(error, player, player2Name, player1Name);
             System.out.println(player.name + " where do you want to place your mark?");
             place = scanner.nextByte();
             error = placingMark(place, player, checkBoard, error);
-
         }
         System.out.println("Congrats " + player.name + " you are the winner !!!");
     }
 // ----------------------------------------------------------------------------------------------------------
-    static void didPlayerMakeMistake(boolean error, Player player){
+    static void didPlayerMakeMistake(boolean error, Player player, String player2Name, String player1Name){
         if(!error)
-            if(player.name == "Player 2"){
-                player.name = "Player 1";
+            if(player.name == player2Name){
+                player.name = player1Name;
                 player.OorX = 'X';
             }
             else {
-                player.name = "Player 2";
+                player.name = player2Name;
                 player.OorX = 'O';
             }
     }
